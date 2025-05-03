@@ -1,28 +1,25 @@
 class Solution {
-    public double myPow(double x, int n) {
-        double ans=1;
-        long nn=n;
-        if(nn<0)
+    public double myPow(double x, int n) 
+    {
+        long N=n;
+        if(N<0)
         {
-            nn=nn*(-1);
+            return 1/helper(x,-N);
         }
-        while(nn>0)
+        return helper(x,N);
+    }
+    private double helper(double x,long n)
+    {
+        if(n==0)
         {
-            if(nn%2==1)
-            {
-                ans=ans*x;
-                nn--;
-            }
-            else
-            {
-                x=x*x;
-                nn=nn/2;
-            }
+            return 1;
         }
-        if(n<0)
+        double halfpower=helper(x,n/2);
+        double halfpowersq=halfpower*halfpower;
+        if(n%2!=0)
         {
-            ans=(double)(1/ans);
+            halfpowersq=x*halfpowersq;
         }
-        return ans;
+        return halfpowersq;
     }
 }
